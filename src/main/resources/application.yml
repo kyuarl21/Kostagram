@@ -1,0 +1,46 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: utf-8
+      enabled: true
+    
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+      
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@127.0.0.1:1521:JAVA
+    username: kostagram
+    password: java
+    
+  jpa:
+    open-in-view: true # true -> View로 돌아올때까지 Session이 안닫힘
+    hibernate:
+      ddl-auto: update # create, update, none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+      
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 2MB
+
+  security:
+    user:
+      name: test
+      password: 1234
+          oauth2:      client:        registration:
+          facebook:
+            client-id: 2784999495137460
+            client-secret: 176899232647ed123706000b0b5a76f5
+            scope:            - public_profile
+            - email
+             
+file:
+  path: C:/Users/kyuoo/Coding/Spring/sts-4.11.0.RELEASE/workspace/upload/
