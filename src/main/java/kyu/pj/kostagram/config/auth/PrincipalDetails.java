@@ -87,5 +87,4 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 		
 		return (String)attributes.get("name");
 	}
-	
 }

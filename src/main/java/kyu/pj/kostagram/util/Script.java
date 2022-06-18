@@ -3,7 +3,7 @@ package kyu.pj.kostagram.util;
 public class Script {
 	
 	public static String back(String msg) {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("<script>");
 		sb.append("alert('" + msg + "');");
 		sb.append("history.back();");

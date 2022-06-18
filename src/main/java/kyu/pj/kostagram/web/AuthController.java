@@ -38,10 +38,11 @@ public class AuthController {
 	}
 	
 	@PostMapping("/auth/signup")
-	public @ResponseBody String signup(@Valid SignupDto signupDTO, BindingResult bindingResult) { //key = value (x-www-form-urlencoded)
+	@ResponseBody
+	public String SignUp(@Valid SignupDto signupDto, BindingResult bindingResult) { //key = value (x-www-form-urlencoded)
 		
-		//Users <- SignDTO
-		Users users = signupDTO.toEntity();
+		//Users <- SignDto
+		Users users = signupDto.toEntity();
 		Users usersEntity = authService.signUp(users);
 		System.out.println(usersEntity);
 		
