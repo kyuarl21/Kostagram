@@ -126,30 +126,6 @@
 
 		<div class="subscribe-list" id="subscribeModalList">
 		
-		<div class="subscribe__item" id="subscribeModalItem-1">
-				<div class="subscribe__img">
-					<img src="#" onerror="this.src='/images/profile.jpg'"/>
-				</div>
-				<div class="subscribe__text">
-					<h2>hong</h2>
-				</div>
-				<div class="subscribe__btn">
-					<button class="cta blue" onclick="toggleSubscribeModal(this)">구독취소</button>
-				</div>
-			</div>
-
-			<div class="subscribe__item" id="subscribeModalItem-2">
-				<div class="subscribe__img">
-					<img src="#" onerror="this.src='/images/profile.jpg'"/>
-				</div>
-				<div class="subscribe__text">
-					<h2>kang</h2>
-				</div>
-				<div class="subscribe__btn">
-					<button class="cta blue" onclick="toggleSubscribeModal(this)">구독취소</button>
-				</div>
-			</div>
-
 		</div>
 	</div>
 
