@@ -30,7 +30,7 @@
 				
 				<c:choose>
 					<c:when test="${dto.pageOwnerState}">
-						<button class="cta" onclick="location.href='/image/upload'">사진등록</button>
+						<button class="cta" onclick="location.href='/image/upload'">사진 등록</button>
 					</c:when>
 					<c:otherwise>
 						<c:choose>
@@ -53,7 +53,7 @@
 				<ul>
 					<li><a href="">게시물<span>${dto.imageCount}</span>
 					</a></li>
-					<li><a href="javascript:subscribeInfoModalOpen();">팔로잉<span>${dto.subscribeCount}</span>
+					<li><a href="javascript:subscribeInfoModalOpen(${dto.users.id});">구독 정보<span>${dto.subscribeCount}</span>
 					</a></li>
 				</ul>
 			</div>
@@ -118,7 +118,7 @@
 <div class="modal-subscribe">
 	<div class="subscribe">
 		<div class="subscribe-header">
-			<span>구독정보</span>
+			<span>구독 정보</span>
 			<button onclick="modalClose()">
 				<i class="fas fa-times"></i>
 			</button>

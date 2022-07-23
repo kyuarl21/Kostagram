@@ -37,14 +37,14 @@ public class UserApiController {
 	@PutMapping("/api/user/{id}")
 	public CMRespDto<?> update(
 			@PathVariable int id,
-			@Valid UsersUpdateDto usersUpdateDTO,
+			@Valid UsersUpdateDto usersUpdateDto,
 			BindingResult bindingResult, //@Valid 다음 파라미터에 안넣으면 안먹힘
 			@AuthenticationPrincipal PrincipalDetails principalDetails) {
 		
-		Users usersEntity = usersService.profileUpdate(id, usersUpdateDTO.toEntity());
+		Users usersEntity = usersService.profileUpdate(id, usersUpdateDto.toEntity());
 		principalDetails.setUsers(usersEntity); //session 정보 변경
 		
-		return new CMRespDto<>(1, "정보변경 완료", usersEntity); //응답시에 userEntity의 모든 getter 함수가 호출되고 json으로 파싱하여 응답
+		return new CMRespDto<>(1, "정보 변경 완료", usersEntity); //응답시에 userEntity의 모든 getter 함수가 호출되고 json으로 파싱하여 응답
 	}
 	
 	@PutMapping("/api/user/{principalId}/profileImageUrl")
@@ -54,14 +54,14 @@ public class UserApiController {
 		Users usersEntity = usersService.profileImageUpdate(principalId, profileImageFile);
 		principalDetails.setUsers(usersEntity);
 		
-		return new ResponseEntity<>(new CMRespDto<>(1, "프로필사진이 변경되었습니다", null), HttpStatus.OK);
+		return new ResponseEntity<>(new CMRespDto<>(1, "프로필 사진이 변경되었습니다", null), HttpStatus.OK);
 	}
 	
 	@GetMapping("/api/user/{pageUserId}/subscribe")
 	public ResponseEntity<?> subscribeList(@PathVariable int pageUserId, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		
-		List<SubscribeDto> subscribeDTO = subscribeService.subscribeList(principalDetails.getUsers().getId(), pageUserId);
+		List<SubscribeDto> subscribeDto = subscribeService.subscribeList(principalDetails.getUsers().getId(), pageUserId);
 		
-		return new ResponseEntity<>(new CMRespDto<>(1, "팔로잉 리스트 가져오기 성공", subscribeDTO), HttpStatus.OK);
+		return new ResponseEntity<>(new CMRespDto<>(1, "구독자 리스트 가져오기 성공", subscribeDto), HttpStatus.OK);
 	}
 }

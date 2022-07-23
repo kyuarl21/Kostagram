@@ -40,7 +40,7 @@ function toggleSubscribe(toUserId, obj) {
 	}
 }
 
-// (2) 구독자 정보  모달 보기
+// (2) 구독자 정보 모달 보기
 function subscribeInfoModalOpen(pageUserId) {
 	$(".modal-subscribe").css("display", "flex");
 	
@@ -61,26 +61,25 @@ function subscribeInfoModalOpen(pageUserId) {
 
 function getSubscribeModalItem(u) {
 	let item = `<div class="subscribe__item" id="subscribeModalItem-${u.id}">
-		<div class="subscribe__img">
-			<img src="/upload/${u.profileImageUrl}" onerror="this.src='/images/profile.jpg'"/>
-		</div>
-		<div class="subscribe__text">
-			<h2>${u.username}</h2>
-		</div>
-		<div class="subscribe__btn">`;
-		
-		if(u.equalUserState){ //동일 유저가 아닐때 버튼이 만들어짐
-			if(u.subscrbieState){ //구독한 상태
-				item += `<button class="cta blue" onClick="toggleSubscribe(${u.id}, this)">팔로잉</button>`
-			}else{
-				item += `<button class="cta" onClick="toggleSubscribe(${u.id}, this)">팔로우</button>`
-			}
+						<div class="subscribe__img">
+							<img src="/upload/${u.profileImageUrl}" onerror="this.src='/images/profile.jpg'"/>
+						</div>
+						<div class="subscribe__text">
+							<h2>${u.username}</h2>
+						</div>
+						<div class="subscribe__btn">`;
+						
+	if(!u.equalUserState){	//동일 유저가 아닐때 버튼이 만들어짐
+		if(u.subscrbieState){	//구독한 상태
+			item += `<button class="cta blue" onClick="toggleSubscribe(${u.id}, this)">팔로잉</button>`
+		}else{
+			item += `<button class="cta" onClick="toggleSubscribe(${u.id}, this)">팔로우</button>`
 		}
+	}
 		
-		item +=`
-		
-		</div>
-	</div>`;
+	item +=`
+						</div>
+					</div>`;
 	
 	return item;
 }
