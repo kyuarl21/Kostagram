@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
-import kyu.pj.kostagram.handler.ex.CustomApiException;
-import kyu.pj.kostagram.handler.ex.CustomException;
-import kyu.pj.kostagram.handler.ex.CustomValidationAPIException;
-import kyu.pj.kostagram.handler.ex.CustomValidationException;
+import kyu.pj.kostagram.handler.exception.CustomApiException;
+import kyu.pj.kostagram.handler.exception.CustomException;
+import kyu.pj.kostagram.handler.exception.CustomValidationAPIException;
+import kyu.pj.kostagram.handler.exception.CustomValidationException;
 import kyu.pj.kostagram.util.Script;
 import kyu.pj.kostagram.web.dto.CMRespDto;
 

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kyu.pj.kostagram.domain.subscribe.SubscribeRepository;
-import kyu.pj.kostagram.handler.ex.CustomApiException;
+import kyu.pj.kostagram.handler.exception.CustomApiException;
 import kyu.pj.kostagram.web.dto.subscribe.SubscribeDto;
 import lombok.RequiredArgsConstructor;
 

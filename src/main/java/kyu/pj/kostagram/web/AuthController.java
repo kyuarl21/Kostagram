@@ -1,19 +1,14 @@
 package kyu.pj.kostagram.web;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kyu.pj.kostagram.domain.users.Users;
-import kyu.pj.kostagram.handler.ex.CustomValidationException;
 import kyu.pj.kostagram.service.AuthService;
 import kyu.pj.kostagram.util.Script;
 import kyu.pj.kostagram.web.dto.auth.SignupDto;

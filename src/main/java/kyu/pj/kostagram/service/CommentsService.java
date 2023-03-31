@@ -8,7 +8,7 @@ import kyu.pj.kostagram.domain.comments.CommentsRepository;
 import kyu.pj.kostagram.domain.image.Image;
 import kyu.pj.kostagram.domain.users.Users;
 import kyu.pj.kostagram.domain.users.UsersRepository;
-import kyu.pj.kostagram.handler.ex.CustomApiException;
+import kyu.pj.kostagram.handler.exception.CustomApiException;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

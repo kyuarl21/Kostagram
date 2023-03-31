@@ -1,4 +1,4 @@
-package kyu.pj.kostagram.handler.ex;
+package kyu.pj.kostagram.handler.exception;
 
 public class CustomException extends RuntimeException {
 	

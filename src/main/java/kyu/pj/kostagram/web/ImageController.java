@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import kyu.pj.kostagram.config.auth.PrincipalDetails;
 import kyu.pj.kostagram.domain.image.Image;
-import kyu.pj.kostagram.handler.ex.CustomValidationException;
+import kyu.pj.kostagram.handler.exception.CustomValidationException;
 import kyu.pj.kostagram.service.ImageService;
 import kyu.pj.kostagram.web.dto.image.ImageUploadDto;
 import lombok.RequiredArgsConstructor;

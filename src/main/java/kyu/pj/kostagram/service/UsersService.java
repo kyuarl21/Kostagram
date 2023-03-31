@@ -14,9 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 import kyu.pj.kostagram.domain.subscribe.SubscribeRepository;
 import kyu.pj.kostagram.domain.users.Users;
 import kyu.pj.kostagram.domain.users.UsersRepository;
-import kyu.pj.kostagram.handler.ex.CustomApiException;
-import kyu.pj.kostagram.handler.ex.CustomException;
-import kyu.pj.kostagram.handler.ex.CustomValidationAPIException;
+import kyu.pj.kostagram.handler.exception.CustomApiException;
+import kyu.pj.kostagram.handler.exception.CustomException;
+import kyu.pj.kostagram.handler.exception.CustomValidationAPIException;
 import kyu.pj.kostagram.web.dto.users.UsersProfileDto;
 import lombok.RequiredArgsConstructor;
 
