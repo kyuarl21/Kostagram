@@ -11,15 +11,15 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import kyu.pj.kostagram.config.auth.PrincipalDetails;
-import kyu.pj.kostagram.domain.users.Users;
-import kyu.pj.kostagram.domain.users.UsersRepository;
+import kyu.pj.kostagram.domain.user.User;
+import kyu.pj.kostagram.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
 public class OAuth2DetailsService extends DefaultOAuth2UserService {
 	
-	private final UsersRepository usersRepository;
+	private final UserRepository userRepository;
 	
 	@Override
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -31,9 +31,9 @@ public class OAuth2DetailsService extends DefaultOAuth2UserService {
 		String email = (String)userInfo.get("email");
 		String name = (String)userInfo.get("name");
 		
-		Users usersEntity = usersRepository.findByUsername(username);
-		if(usersEntity == null) { //최초 페이스북 로그인
-			Users users = Users.builder()
+		User userEntity = userRepository.findByUsername(username);
+		if(userEntity == null) { //최초 페이스북 로그인
+			User user = User.builder()
 					.username(username)
 					.password(password)
 					.email(email)
@@ -41,9 +41,9 @@ public class OAuth2DetailsService extends DefaultOAuth2UserService {
 					.role("ROLE_USER")
 					.build();
 			
-			return new PrincipalDetails(usersRepository.save(users), oAuth2User.getAttributes());
+			return new PrincipalDetails(userRepository.save(user), oAuth2User.getAttributes());
 		}else { //이미 페이스북으로 가입된 회원임
-			return new PrincipalDetails(usersEntity, oAuth2User.getAttributes());
+			return new PrincipalDetails(userEntity, oAuth2User.getAttributes());
 		}
 	}
 }

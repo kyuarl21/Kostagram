@@ -1,4 +1,4 @@
-package kyu.pj.kostagram.domain.users;
+package kyu.pj.kostagram.domain.user;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,10 +25,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity //DB에 테이블 생성
-public class Users {
+public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //번호 증가 전략이 DB를 따라감(Oracle은 Seq)
-	private int id;
+	private Integer id;
 	
 	@Column(length = 100, unique = true)
 	private String username;
@@ -46,12 +46,12 @@ public class Users {
 	private String profileImageUrl; //프로필 사진
 	private String role; //권한
 	
-	//연관 관계의 주인은 = Image테이블의 users, mappedBy = 이 칼럼은 연관 관계의 주인이 아니니 외래키를 만들지 않음
-	//Users를 Select할때 해당 User id로 등록된 image들을 다 가져옴
+	//연관 관계의 주인은 = Image테이블의 user, mappedBy = 이 칼럼은 연관 관계의 주인이 아니니 외래키를 만들지 않음
+	//User를 Select할때 해당 User id로 등록된 image들을 다 가져옴
 	//Lazy = User를 Select할때 해당 User id로 등록된 image들을 안가져옴 -> 대신 getImages() 함수의 image들이 호출될때 가져옴
 	//Eager = User를 Select할때 해당 User id로 등록된 image들을 Join해서 전부 가져옴
-	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY) //Lazy로딩
-	@JsonIgnoreProperties({"users"}) //Image의 users가 JSON으로 파싱이 되는걸 막음
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY) //Lazy로딩
+	@JsonIgnoreProperties({"user"}) //Image의 user가 JSON으로 파싱이 되는걸 막음
 	private List<Image> images; //양방향 매핑
 	private LocalDateTime createDate;
 	

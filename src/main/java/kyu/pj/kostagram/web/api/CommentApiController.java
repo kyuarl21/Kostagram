@@ -13,31 +13,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import kyu.pj.kostagram.config.auth.PrincipalDetails;
-import kyu.pj.kostagram.domain.comments.Comments;
-import kyu.pj.kostagram.service.CommentsService;
+import kyu.pj.kostagram.domain.comment.Comment;
+import kyu.pj.kostagram.service.CommentService;
 import kyu.pj.kostagram.web.dto.CMRespDto;
-import kyu.pj.kostagram.web.dto.comments.CommentsDto;
+import kyu.pj.kostagram.web.dto.comment.CommentDto;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
 public class CommentApiController {
 	
-	private final CommentsService commentsService;
+	private final CommentService commentService;
 	
 	@PostMapping("/api/comment")
-	public ResponseEntity<?> commentSave(@Valid @RequestBody CommentsDto commentsDto, BindingResult bindingResult, @AuthenticationPrincipal PrincipalDetails principalDetails){
-		
-		Comments comments = commentsService.writeComment(commentsDto.getContent(), commentsDto.getImageId(), principalDetails.getUsers().getId());
-		
-		return new ResponseEntity<>(new CMRespDto<>(1, "댓글이 작성되었습니다", comments), HttpStatus.CREATED);
+	public ResponseEntity<?> commentSave(@Valid @RequestBody CommentDto commentDto, BindingResult bindingResult, @AuthenticationPrincipal PrincipalDetails principalDetails){
+		Comment comment = commentService.writeComment(commentDto.getContent(), commentDto.getImageId(), principalDetails.getUser().getId());
+		return new ResponseEntity<>(new CMRespDto<>(1, "댓글이 작성되었습니다", comment), HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping("/api/comment/{id}")
 	public ResponseEntity<?> commentDelete(@PathVariable int id){
-		
-		commentsService.deleteComment(id);
-		
+		commentService.deleteComment(id);
 		return new ResponseEntity<>(new CMRespDto<>(1, "댓글이 삭제되었습니다", null), HttpStatus.OK);
 	}
 }

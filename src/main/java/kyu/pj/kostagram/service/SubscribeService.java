@@ -26,12 +26,12 @@ public class SubscribeService {
 		
 		//Query 준비
 		StringBuffer sb = new StringBuffer();
-		sb.append("SELECT u.id, u.username, u.profileImageUrl, ");
-		sb.append("if ((SELECT 1 FROM subscribe WHERE fromUserId = ? AND toUserId = u.id), 1, 0) subscribeState, ");
+		sb.append("SELECT u.id, u.username, u.profile_image_url, ");
+		sb.append("if ((SELECT 1 FROM subscribe WHERE from_user_id = ? AND to_user_id = u.id), 1, 0) subscribeState, ");
 		sb.append("if ((? = u.id), 1, 0) equalUserState ");
-		sb.append("FROM users u INNER JOIN subscribe s ");
-		sb.append("ON u.id = s.toUserId ");
-		sb.append("WHERE s.fromUserId = ?");
+		sb.append("FROM user u INNER JOIN subscribe s ");
+		sb.append("ON u.id = s.to_user_id ");
+		sb.append("WHERE s.from_user_id = ?");
 		
 		//Query 완성
 		Query query = entityManager.createNativeQuery(sb.toString())

@@ -1,12 +1,12 @@
-package kyu.pj.kostagram.web.dto.users;
+package kyu.pj.kostagram.web.dto.user;
 
 import javax.validation.constraints.NotBlank;
 
-import kyu.pj.kostagram.domain.users.Users;
+import kyu.pj.kostagram.domain.user.User;
 import lombok.Data;
 
 @Data
-public class UsersUpdateDto {
+public class UserUpdateDto {
 	@NotBlank
 	private String name; //필수
 	@NotBlank
@@ -16,9 +16,8 @@ public class UsersUpdateDto {
 	private String phone;
 	private String gender;
 	
-	public Users toEntity() {
-		
-		return Users.builder()
+	public User toEntity() {
+		return User.builder()
 				.name(name)
 				.password(password)
 				.website(website)

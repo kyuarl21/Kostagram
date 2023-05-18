@@ -34,10 +34,10 @@ function getStoryItem(image) {
 	let item = `<div class="story-list__item">
 		<div class="sl__item__header">
 			<div>
-				<img class="profile-image" src="/upload/${image.users.profileImageUrl}"
+				<img class="profile-image" src="/upload/${image.user.profileImageUrl}"
 					onerror="this.src='/images/profile.jpg'"/>
 			</div>
-			<div>${image.users.username}</div>
+			<div>${image.user.username}</div>
 		</div>
 		
 		<div class="sl__item__img">
@@ -66,16 +66,16 @@ function getStoryItem(image) {
 				<p>${image.caption}</p>
 			</div>
 	
-			<div id="storyCommentsList-${image.id}">`;
+			<div id="storyCommentList-${image.id}">`;
 			
-				image.commentsList.forEach((comment) => {
+				image.commentList.forEach((comment) => {
 					
 					item += `<div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
 					<p>
-						<b>${comment.users.username} :</b> ${comment.content}
+						<b>${comment.user.username} :</b> ${comment.content}
 					</p>`;
 					
-					if(principalId == comment.users.id){
+					if(principalId == comment.user.id){
 						item += `<button onClick="deleteComment(${comment.id})">
 									<i class="fas fa-times"></i>
 								</button>`;
@@ -126,7 +126,7 @@ function toggleLike(imageId) {
 	
 		$.ajax({
 			type: "post",
-			url: `/api/image/${imageId}/likes`,
+			url: `/api/image/${imageId}/like`,
 			dataType: "json"
 		}).done(res => {
 			let likeCountStr = $(`#storyLikeCount-${imageId}`).text();
@@ -144,7 +144,7 @@ function toggleLike(imageId) {
 		
 		$.ajax({
 			type: "delete",
-			url: `/api/image/${imageId}/likes`,
+			url: `/api/image/${imageId}/like`,
 			dataType: "json"
 		}).done(res => {
 			let likeCountStr = $(`#storyLikeCount-${imageId}`).text();
@@ -164,7 +164,7 @@ function toggleLike(imageId) {
 function addComment(imageId) {
 
 	let commentInput = $(`#storyCommentInput-${imageId}`);
-	let commentsList = $(`#storyCommentsList-${imageId}`);
+	let commentList = $(`#storyCommentList-${imageId}`);
 
 	let data = {
 		imageId: imageId,
@@ -189,12 +189,12 @@ function addComment(imageId) {
 		let content = `
 		  <div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}"> 
 		    <p>
-		      <b>${comment.users.username} :</b>
+		      <b>${comment.user.username} :</b>
 		      ${comment.content}
 		    </p>
 		    <button onClick="deleteComment(${comment.id})"><i class="fas fa-times"></i></button>
 		  </div>`;
-		commentsList.append(content);
+		commentList.append(content);
 		
 	}).fail(error => {
 		console.log("에러", error.responseJSON.data.content);

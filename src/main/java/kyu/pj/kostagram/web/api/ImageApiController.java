@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kyu.pj.kostagram.config.auth.PrincipalDetails;
 import kyu.pj.kostagram.domain.image.Image;
 import kyu.pj.kostagram.service.ImageService;
-import kyu.pj.kostagram.service.LikesService;
+import kyu.pj.kostagram.service.LikeService;
 import kyu.pj.kostagram.web.dto.CMRespDto;
 import lombok.RequiredArgsConstructor;
 
@@ -24,27 +24,25 @@ import lombok.RequiredArgsConstructor;
 public class ImageApiController {
 	
 	private final ImageService imageService;
-	private final LikesService likesService;
+	private final LikeService likeService;
 	
 	@GetMapping("/api/image")
 	public ResponseEntity<?> imageStory(@AuthenticationPrincipal PrincipalDetails PrincipalDetails,
 			@PageableDefault(size = 3) Pageable pageable){
-		Page<Image> images = imageService.imageStory(PrincipalDetails.getUsers().getId(), pageable);
-		
+
+		Page<Image> images = imageService.imageStory(PrincipalDetails.getUser().getId(), pageable);
 		return new ResponseEntity<>(new CMRespDto<>(1, "성공", images), HttpStatus.OK);
 	}
 	
-	@PostMapping("/api/image/{imageId}/likes")
-	public ResponseEntity<?> likes(@PathVariable int imageId, @AuthenticationPrincipal PrincipalDetails PrincipalDetails){
-		likesService.like(imageId, PrincipalDetails.getUsers().getId());
-		
+	@PostMapping("/api/image/{imageId}/like")
+	public ResponseEntity<?> like(@PathVariable int imageId, @AuthenticationPrincipal PrincipalDetails PrincipalDetails){
+		likeService.like(imageId, PrincipalDetails.getUser().getId());
 		return new ResponseEntity<>(new CMRespDto<>(1, "좋아요 성공", null), HttpStatus.CREATED);
 	}
 	
-	@DeleteMapping("/api/image/{imageId}/likes")
-	public ResponseEntity<?> unLikes(@PathVariable int imageId, @AuthenticationPrincipal PrincipalDetails PrincipalDetails){
-		likesService.unLike(imageId, PrincipalDetails.getUsers().getId());
-		
+	@DeleteMapping("/api/image/{imageId}/like")
+	public ResponseEntity<?> unLike(@PathVariable int imageId, @AuthenticationPrincipal PrincipalDetails PrincipalDetails){
+		likeService.unLike(imageId, PrincipalDetails.getUser().getId());
 		return new ResponseEntity<>(new CMRespDto<>(1, "좋아요 취소 성공", null), HttpStatus.OK);
 	}
 }

@@ -17,9 +17,9 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import kyu.pj.kostagram.domain.comments.Comments;
+import kyu.pj.kostagram.domain.comment.Comment;
 import kyu.pj.kostagram.domain.likes.Likes;
-import kyu.pj.kostagram.domain.users.Users;
+import kyu.pj.kostagram.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,14 +33,14 @@ import lombok.NoArgsConstructor;
 public class Image {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //번호 증가 전략이 DB를 따라감 (Oracle은 Seq)
-	private int id;
+	private Integer id;
 	private String caption; //사진 내용
 	private String postImageUrl; //사진이 서버에 저장된 경로를 DB에 insert
 	
 	@JsonIgnoreProperties({"images"}) //JSON으로 파싱 못하게 막음 (무한참조 방지)
-	@JoinColumn(name = "userId")
-	@ManyToOne(fetch = FetchType.EAGER) //Image를 select하면 join해서 Users정보를 같이 들고옴
-	private Users users;
+	@JoinColumn(name = "user_id")
+	@ManyToOne(fetch = FetchType.EAGER) //Image를 select하면 join해서 User정보를 같이 들고옴
+	private User user;
 	
 	@JsonIgnoreProperties({"image"})
 	@OneToMany(mappedBy = "image") //mappedBy = 이 칼럼은 연관 관계의 주인이 아니니 외래키를 만들지 않음
@@ -49,7 +49,7 @@ public class Image {
 	@OrderBy("id")
 	@JsonIgnoreProperties({"image"})
 	@OneToMany(mappedBy = "image")
-	private List<Comments> commentsList; //댓글 양방향 매핑
+	private List<Comment> commentList; //댓글 양방향 매핑
 	
 	@Transient //DB에 칼럼이 만들어지지 않음
 	private boolean likeState; //좋아요가 눌린 상태인지 아닌지
@@ -63,7 +63,7 @@ public class Image {
 		this.createDate = LocalDateTime.now();
 	}
 	
-	//Object를 콘솔에 출력할때 문제가 발생해서 Users를 출력 안되게 함
+	//Object를 콘솔에 출력할때 문제가 발생해서 User를 출력 안되게 함
 	/*@Override
 	public String toString() {
 		return "Image [id=" + id + ", caption=" + caption + ", postImageUrl=" + postImageUrl

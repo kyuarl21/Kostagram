@@ -17,7 +17,7 @@ public class WebMvcConfig implements WebMvcConfigurer { //Web 설정 파일
 		
 		WebMvcConfigurer.super.addResourceHandlers(registry);
 		
-		//file:///C:/Users/kyuoo/Coding/Spring/sts-4.11.0.RELEASE/workspace/upload/
+		// file: /Users/kyu/Coding/IdeaProjects/Kostagram/src/main/resources/static/upload/
 		registry
 			.addResourceHandler("/upload/**") //jsp페이지에서 이런 주소패턴이 나오면 uploadFolder가 발동
 			.addResourceLocations("file:///" + uploadFolder)

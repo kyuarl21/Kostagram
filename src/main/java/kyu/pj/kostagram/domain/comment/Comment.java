@@ -1,4 +1,4 @@
-package kyu.pj.kostagram.domain.comments;
+package kyu.pj.kostagram.domain.comment;
 
 import java.time.LocalDateTime;
 
@@ -15,7 +15,7 @@ import javax.persistence.PrePersist;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import kyu.pj.kostagram.domain.image.Image;
-import kyu.pj.kostagram.domain.users.Users;
+import kyu.pj.kostagram.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,20 +26,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class Comments {
+public class Comment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //번호 증가 전략이 DB를 따라감 (Oracle은 Seq)
-	private int id;
+	private Integer id;
 	
 	@Column(length = 100, nullable = false)
 	private String content;
 	
 	@JsonIgnoreProperties({"images"})
-	@JoinColumn(name = "userId")
+	@JoinColumn(name = "user_id")
 	@ManyToOne(fetch = FetchType.EAGER)
-	private Users users;
+	private User user;
 	
-	@JoinColumn(name = "imageId")
+	@JoinColumn(name = "image_id")
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Image image;
 	

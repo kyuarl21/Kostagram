@@ -31,7 +31,7 @@ public class ImageService {
 	public void imageUpload(ImageUploadDto imageUploadDTO, PrincipalDetails principalDetails) {
 		UUID uuid = UUID.randomUUID();
 		String imageFileName = uuid + "_" + imageUploadDTO.getFile().getOriginalFilename();
-		System.out.println("FileName: " + imageFileName);
+		//System.out.println("FileName: " + imageFileName);
 		
 		Path imageFilePath = Paths.get(uploadFolder + imageFileName);
 		
@@ -41,7 +41,7 @@ public class ImageService {
 			e.printStackTrace();
 		}
 		//image 테이블에 저장
-		Image image = imageUploadDTO.toEntity(imageFileName, principalDetails.getUsers());
+		Image image = imageUploadDTO.toEntity(imageFileName, principalDetails.getUser());
 		imageRepository.save(image);
 		
 		//System.out.println(imageEntity); //Object가 실행되면 toString()이 자동 호출
@@ -53,22 +53,18 @@ public class ImageService {
 		
 		//images에 좋아요 상태 담기, images를 뽑아서 좋아요가 눌린 사진들을 뽑아내고 현재 로그인 되있는 유저가 누른 좋아요인지 비교
 		images.forEach((image) -> {
-			
 			image.setLikeCount(image.getLikes().size());
-			
 			image.getLikes().forEach((like) -> {
-				if(like.getUsers().getId() == principalId) {
+				if(like.getUser().getId() == principalId) {
 					image.setLikeState(true);
 				}
 			});
 		});
-		
 		return images;
 	}
 	
 	@Transactional(readOnly = true)
 	public List<Image> popularImage(){
-		
 		return imageRepository.myPopular();
 	}
 }

@@ -12,7 +12,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import kyu.pj.kostagram.domain.users.Users;
+import kyu.pj.kostagram.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,20 +27,20 @@ import lombok.NoArgsConstructor;
 	uniqueConstraints = {
 		@UniqueConstraint(
 			name = "subscribe_uk",
-			columnNames = {"fromUserId", "toUserId"}
+			columnNames = {"from_user_id", "to_user_id"}
 		)
 	}
 )
 public class Subscribe {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //번호 증가 전략이 DB를 따라감 (Oracle은 Seq)
-	private int id;
-	@JoinColumn(name = "fromUserId") //강제로 칼럼명 지정
+	private Integer id;
+	@JoinColumn(name = "from_user_id") //강제로 칼럼명 지정
 	@ManyToOne
-	private Users fromUser;
-	@JoinColumn(name = "toUserId")
+	private User fromUser;
+	@JoinColumn(name = "to_user_id")
 	@ManyToOne
-	private Users toUser;
+	private User toUser;
 	private LocalDateTime createDate;
 	
 	@PrePersist //DB에 insert 되기 직전에 실행

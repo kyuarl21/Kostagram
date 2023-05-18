@@ -15,7 +15,7 @@ import javax.persistence.UniqueConstraint;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import kyu.pj.kostagram.domain.image.Image;
-import kyu.pj.kostagram.domain.users.Users;
+import kyu.pj.kostagram.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,23 +30,23 @@ import lombok.NoArgsConstructor;
 	uniqueConstraints = {
 		@UniqueConstraint(
 			name = "likes_uk",
-			columnNames = {"imageId", "userId"}
+			columnNames = {"image_id", "user_id"}
 		)
 	}
 )
 public class Likes {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //번호 증가 전략이 DB를 따라감 (Oracle은 Seq)
-	private int id;
+	private Integer id;
 	
-	@JoinColumn(name = "imageId")
+	@JoinColumn(name = "image_id")
 	@ManyToOne //기본이 Eager, OneToMany는 Lazy
 	private Image image;
 	
 	@JsonIgnoreProperties({"images"}) //JSON으로 파싱 못하게 막음 (무한참조 방지)
-	@JoinColumn(name = "userId")
+	@JoinColumn(name = "user_id")
 	@ManyToOne
-	private Users users;
+	private User user;
 	
 	private LocalDateTime createDate;
 	

@@ -35,7 +35,7 @@
 <body>
 
 	<-- principalId -->
-	<input type = "hidden" id="principalId" value="${principal.users.id}"/>
+	<input type = "hidden" id="principalId" value="${principal.user.id}"/>
 	
 	<header class="header">
 		<div class="container">
@@ -50,7 +50,7 @@
 					<li class="navi-item"><a href="/image/popular">
 							<i class="far fa-compass"></i>
 						</a></li>
-					<li class="navi-item"><a href="/user/${principal.users.id}">
+					<li class="navi-item"><a href="/user/${principal.user.id}">
 							<i class="far fa-user"></i>
 						</a></li>
 				</ul>
